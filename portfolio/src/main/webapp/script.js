@@ -36,14 +36,18 @@ async function welcome() {
     document.getElementById('welcome-container').innerHTML = quote;
 }
 
-async function seeComments() {
+async function getComments() {
     const response = await fetch('/data');
     const responseText = await response.json();
     console.log(responseText)
-    var quote = "<ul>"
+    var comment = document.getElementById('comment-container')
     responseText.forEach(r => {
-        quote += "<li>" + r + "</li>"
+      comment.appendChild(createListElement(r));
     })
-    quote += "</ul>"
-    document.getElementById('comment-container').innerHTML = quote;
+}
+
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
