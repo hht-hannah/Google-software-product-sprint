@@ -1,9 +1,46 @@
+body{
+    background-color: #f4f4f4;
+}
+
 #content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 
 #greeting-container {
   margin-top: 20px;
+}
+
+#header {
+    height: 60px;
+    width: 100%;
+    background-color: #6983aa;
+    margin-bottom: 20px;
+}
+
+#header a{
+  float: right;
+}
+
+a{
+    text-decoration: none;
+    color: #8ec6c5;
+    margin: 6px;
+}
+
+a:hover {
+    color: #8566aa
+}
+#pic{
+    display: inline-block;
+}
+#funfact {
+    background-color: #8ec6c5;
+    padding: 20px;
+    margin-top: 20px;
+}
+#intro {
+    position: absolute;
+    display: inline-block;
+    margin-left: 40px;
 }
