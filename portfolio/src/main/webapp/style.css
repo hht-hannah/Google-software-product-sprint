@@ -37,10 +37,28 @@ a:hover {
 #funfact {
     background-color: #8ec6c5;
     padding: 20px;
-    margin-top: 20px;
+    margin: 20px 60px 20px 60px;
 }
 #intro {
     position: absolute;
-    display: inline-block;
     margin-left: 40px;
+    height: 500px;
+    width: 60%;
+    display: inline-block;
+}
+#comment {
+     background-color: #8ec6c5;
+     padding: 20px;
+    margin: 20px 60px 20px 60px;
+}
+.comment-entry-user {
+    color: #8566aa
+}
+.comment-entry {
+    list-style: none;
+    border-bottom: 1px solid #6983aa;
+    padding: 10px;
+}
+#comment-container{
+    margin-bottom: 20px;
 }

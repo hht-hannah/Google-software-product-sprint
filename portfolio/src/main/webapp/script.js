@@ -42,12 +42,13 @@ async function getComments() {
     console.log(responseText)
     var comment = document.getElementById('comment-container')
     responseText.forEach(r => {
-      comment.appendChild(createListElement(r));
+      comment.appendChild(createListElement(r.comment, r.user));
     })
 }
 
-function createListElement(text) {
+function createListElement(text, user) {
   const liElement = document.createElement('li');
-  liElement.innerText = text;
+  liElement.innerHTML = "<span class='comment-entry-user'>" + user + "</span> : " + text;
+  liElement.setAttribute("class", "comment-entry")
   return liElement;
 }
