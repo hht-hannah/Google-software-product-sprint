@@ -15,6 +15,9 @@
 /**
  * Adds a random greeting to the page.
  */
+
+var userEmail = "";
+var loginUrl = "";
 function addRandomGreeting() {
     const greetings =
         ['I really adore Minions! They are soooo cute!',
@@ -30,10 +33,22 @@ function addRandomGreeting() {
     greetingContainer.innerHTML = greeting;
 }
 
-async function welcome() {
-    const response = await fetch('/data');
-    const quote = await response.text();
-    document.getElementById('welcome-container').innerHTML = quote;
+async function onLoad() {
+    await login();
+    await getComments();
+}  
+
+async function login() {
+    const response = await fetch('/login');
+    const welcome = await response.json();
+    if (welcome[0] === "") {
+        loginUrl = welcome[1];
+        document.getElementById('login-container').innerHTML = " <a href="+ welcome[1] +"> Login </a>";
+    } else {
+        userEmail = welcome[0];
+        loginUrl = welcome[1];
+        document.getElementById('login-container').innerHTML = "<span id='welcome-message'>Hello, "+ userEmail + "</span><a href="+ welcome[1] +"> Logout </a>";
+    }
 }
 
 async function getComments() {
@@ -42,13 +57,21 @@ async function getComments() {
     console.log(responseText)
     var comment = document.getElementById('comment-container')
     responseText.forEach(r => {
-      comment.appendChild(createListElement(r.comment, r.user));
+        comment.appendChild(createListElement(r.comment, r.user, r.email));
     })
+
+    if (userEmail === "") {
+        document.getElementById('post-comment-container').style.display="none";
+    }else {
+        document.getElementById('post-comment-container').style.display="inline-block";
+        document.getElementById('email-address').setAttribute("value",userEmail)
+    }
+
 }
 
-function createListElement(text, user) {
-  const liElement = document.createElement('li');
-  liElement.innerHTML = "<span class='comment-entry-user'>" + user + "</span> : " + text;
-  liElement.setAttribute("class", "comment-entry")
-  return liElement;
+function createListElement(text, user, email) {
+    const liElement = document.createElement('li');
+    liElement.innerHTML = "<span class='comment-entry-user'>" + user +" ("+ email+ ")</span>: " + text;
+    liElement.setAttribute("class", "comment-entry")
+    return liElement;
 }

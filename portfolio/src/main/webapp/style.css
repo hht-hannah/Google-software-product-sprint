@@ -3,12 +3,12 @@ body{
 }
 
 #content {
-  margin-left: 80px;
-  margin-right: 80px;
+    margin-left: 80px;
+     margin-right: 80px;
 }
 
 #greeting-container {
-  margin-top: 20px;
+     margin-top: 20px;
 }
 
 #header {
@@ -19,9 +19,15 @@ body{
 }
 
 #header a{
-  float: right;
+     float: right;
 }
-
+#login-container {
+    float: left;
+}
+#welcome-message {
+    margin: 6px;
+    display: inline-block;
+}
 a{
     text-decoration: none;
     color: #8ec6c5;
@@ -47,8 +53,8 @@ a:hover {
     display: inline-block;
 }
 #comment {
-     background-color: #8ec6c5;
-     padding: 20px;
+    background-color: #8ec6c5;
+    padding: 20px;
     margin: 20px 60px 20px 60px;
 }
 .comment-entry-user {
@@ -61,4 +67,11 @@ a:hover {
 }
 #comment-container{
     margin-bottom: 20px;
+}
+
+#login-url {
+    text-decoration: none;
+    color: #8566aa;
+    margin: 6px;
+
 }

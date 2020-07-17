@@ -8,10 +8,10 @@
 	<script src="script.js"></script>
 </head>
 
-<body onload="getComments()">
+<body onload="onLoad()">
 	<div>
 		<div id="header">
-			<button onclick="welcome()"> Welcome! </button>
+			<div id="login-container"> </div>
 			<a id="linkedin" href="https://www.linkedin.com/in/%E6%B6%B5%E5%A9%B7-%E9%BB%84-65568a193/"> My LinkedIn
 			</a>
 			<a id="github" href="https://github.com/hht-hannah"> My Github </a>
@@ -19,7 +19,6 @@
 		<div id="content">
 			<div id="pic"> <img src="/images/photo.jpg" alt="My Photo"  width="400" height="500"> </div>
 				<div id="intro">
-					<div id="welcome-container"> </div>
 					<h1>Hi! I am Hannah.</h1>
 					<p> My name is Huang Hanting. I'm from Shanghai, and I'm currently studying computer science in the
 						University of Hong Kong. </p>
@@ -42,18 +41,21 @@
 		</div>
 		<div id="comment">
 			<div id="comment-container"> </div>
-			<form action="/data" method="POST">
-				<div>
-					<span>Your name:</span>
-					<input type="input" name="user"/>
+            <div id="post-comment-container">
+                <form action="/data" method="POST">
+                    <div>
+                        <span>Your name:</span>
+                        <input type="input" name="user"/>
+                        <input id="email-address" type="hidden" name="email" value="">
+                    </div>                        
+                    <div>
+                        <div>Please leave a comment:</div>
+                        <textarea name="comment" rows="5" cols="30"> </textarea>
                     </div>
-					<div>
-						<div>Please leave a comment:</div>
-						<textarea name="comment" rows="5" cols="30"> </textarea>
-					</div>
-					<input type="submit" />
+                    <input type="submit" />
                 </form>
-				</div>
+            </div>
+	    </div>
 </body>
 
 </html>
