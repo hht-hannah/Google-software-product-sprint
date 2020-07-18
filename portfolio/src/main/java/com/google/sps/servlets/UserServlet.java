@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ public class UserServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html");
-    ArrayList<String> result = new ArrayList<String>();
+    HashMap<String, String> result = new HashMap<String, String>();
 
     UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
@@ -25,22 +25,22 @@ public class UserServlet extends HttpServlet {
         String urlToRedirectToAfterUserLogsOut = "/";
         String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-        result.add(userEmail);
-        result.add(logoutUrl);
+        result.put("email", userEmail);
+        result.put("url", logoutUrl);
         response.getWriter().println(convertToJsonUsingGson(result));
     } else {
         String urlToRedirectToAfterUserLogsIn = "/";
         String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 
-        result.add("");
-        result.add(loginUrl);
+        result.put("email", "");
+        result.put("url", loginUrl);
         response.getWriter().println(convertToJsonUsingGson(result));
     }
   }
 
-    private String convertToJsonUsingGson(ArrayList comments) {
+    private String convertToJsonUsingGson(HashMap<String, String> data) {
         Gson gson = new Gson();
-        String json = gson.toJson(comments);
+        String json = gson.toJson(data);
         return json;
     }
 }

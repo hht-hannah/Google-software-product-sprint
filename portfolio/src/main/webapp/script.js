@@ -17,7 +17,6 @@
  */
 
 var userEmail = "";
-var loginUrl = "";
 function addRandomGreeting() {
     const greetings =
         ['I really adore Minions! They are soooo cute!',
@@ -40,21 +39,20 @@ async function onLoad() {
 
 async function login() {
     const response = await fetch('/login');
-    const welcome = await response.json();
-    if (welcome[0] === "") {
-        loginUrl = welcome[1];
-        document.getElementById('login-container').innerHTML = " <a href="+ welcome[1] +"> Login </a>";
+    const responseData = await response.json();
+    if (responseData["email"] === "") {
+        var loginUrl = responseData["url"]
+        document.getElementById('login-container').innerHTML = " <a href="+ loginUrl +"> Login </a>";
     } else {
-        userEmail = welcome[0];
-        loginUrl = welcome[1];
-        document.getElementById('login-container').innerHTML = "<span id='welcome-message'>Hello, "+ userEmail + "</span><a href="+ welcome[1] +"> Logout </a>";
+        userEmail = responseData["email"];
+        var logoutUrl = responseData["url"];
+        document.getElementById('login-container').innerHTML = "<span id='welcome-message'>Hello, "+ userEmail + "</span><a href="+ logoutUrl +"> Logout </a>";
     }
 }
 
 async function getComments() {
     const response = await fetch('/data');
     const responseText = await response.json();
-    console.log(responseText)
     var comment = document.getElementById('comment-container')
     responseText.forEach(r => {
         comment.appendChild(createListElement(r.comment, r.user, r.email));
